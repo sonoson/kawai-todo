@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, Dimensions,Platform } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Dimensions, Platform,  ScrollView } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const { height, width } = Dimensions.get("window");
 
@@ -13,7 +14,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <StatusBar barStyle= "light-content" />
         <Text> style = {styles.title} Kawai To Do </Text>
-        <View>
+        <View style = {styles.card}>
           <TextInput 
           style= {styles.input}
           placeholder={"New to do" }
@@ -23,7 +24,9 @@ export default class App extends React.Component {
           returnKeyType={"done"}
           autoCorrect={false}
            />
-          <Scroll
+          <ScrollView contentContainerStyle={styles.toDos}>
+            <ToDo />            
+          </ScrollView>
         </View>
       </View>
     );
@@ -51,17 +54,17 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor : "white",
     flex : 1,
-    width: width -25,
+    width: width - 25 ,
     borderTopLeftRadius : 10,
     borderTopRightRadius : 10,
     ...Platform.select({
       ios: {
-        shadowColor: "rgb(50, 50, 50)",
-        shadowOpacity: 0.5,
-        shadowRadius: 5,
-        shadowOffset: {
-          height: -1,
-          width: 0
+        shadowColor : "rgb(50, 50, 50)",
+        shadowOpacity : 0.5,
+        shadowRadius : 5,
+        shadowOffset : {
+          height : -1,
+          width : 0
         }
       },
       android: {
@@ -75,4 +78,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     fontSize: 25
   },
+  toDos: {
+
+  }
 });
